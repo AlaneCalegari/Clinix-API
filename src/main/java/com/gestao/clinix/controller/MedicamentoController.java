@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.gestao.clinix.dto.MedicamentoDTO;
 import com.gestao.clinix.service.MedicamentoService;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @RestController
 @RequestMapping("/medicamentos")
@@ -47,6 +48,7 @@ public class MedicamentoController {
 	}
 	
 	@PostMapping()
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> post(@RequestBody MedicamentoDTO medicamentoDTO){
 		try {
 			getMedicamentoService().post(medicamentoDTO);
@@ -57,6 +59,7 @@ public class MedicamentoController {
 	}
 	
 	@PutMapping()
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> update(@RequestBody MedicamentoDTO medicamentoDTO) {
 		try {
 			getMedicamentoService().update(medicamentoDTO);
@@ -67,6 +70,7 @@ public class MedicamentoController {
 	}
 	
 	@DeleteMapping() 
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> delete (@RequestParam Long id) {
 		try {
 			getMedicamentoService().delete(id);
