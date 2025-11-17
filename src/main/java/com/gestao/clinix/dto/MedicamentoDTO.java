@@ -24,7 +24,7 @@ public class MedicamentoDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+		
 
 	public String getNomeComercial() {
 		return nomeComercial;
@@ -51,7 +51,5 @@ public class MedicamentoDTO {
 	
 	public static MedicamentoDTO convertToDTO(Medicamento medicamento) {
 		return getModelMapper().map(medicamento, MedicamentoDTO.class);
-	}
-	
-
+	}	
 }
