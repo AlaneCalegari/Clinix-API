@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.gestao.clinix.config.CorsConfig;
 import com.gestao.clinix.config.CustomAccessDeniedHandler;
 import com.gestao.clinix.config.CustomAuthenticationEntryPoint;
 import com.gestao.clinix.config.JwtAuthenticationFilter;
@@ -36,15 +37,11 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(request -> {
-			var corsConfig = new org.springframework.web.cors.CorsConfiguration();
-			corsConfig.setAllowedOrigins(java.util.List.of("http://localhost:4200"));
-			corsConfig.setAllowedMethods(java.util.List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-			corsConfig.setAllowedHeaders(java.util.List.of("*"));
-			corsConfig.setAllowCredentials(true);
-			return corsConfig;
-		})).authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll().requestMatchers("/users/**")
-				.hasRole("ADMIN").anyRequest().authenticated())
+
+		http.csrf(csrf -> csrf.disable())
+				.cors(cors -> cors.configurationSource(new CorsConfig().corsConfigurationSource()))
+				.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll().requestMatchers("/users/**")
+						.hasRole("ADMIN").anyRequest().authenticated())
 				.exceptionHandling(exception -> exception.accessDeniedHandler(accessDeniedHandler)
 						.authenticationEntryPoint(authenticationEntryPoint))
 				.sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
