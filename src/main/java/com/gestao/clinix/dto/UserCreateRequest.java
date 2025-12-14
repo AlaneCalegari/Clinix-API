@@ -11,6 +11,10 @@ import jakarta.validation.constraints.Size;
  */
 public class UserCreateRequest {
 
+	@NotBlank(message = "O nome é obrigatório.")
+	@Size(max = 255)
+	private String nome;
+
 	@NotBlank(message = "O e-mail é obrigatório.")
 	@Email(message = "Formato de e-mail inválido.")
 	@Pattern(regexp = "^[A-Za-z0-9._%+-]+@clinix\\.com$", message = "O e-mail deve pertencer ao domínio @clinix.com")
@@ -25,6 +29,15 @@ public class UserCreateRequest {
 	private String role; // "ADMIN" ou "USER"
 
 	// getters / setters
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
