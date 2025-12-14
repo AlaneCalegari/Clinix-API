@@ -25,6 +25,7 @@ public class DataLoader implements CommandLineRunner {
 
 		// Cria apenas o admin
 		Users admin = new Users();
+		admin.setNome("Rafael Zanella");
 		admin.setUsuario("rafael.zanella@clinix.com"); // seu e-mail corporativo
 		admin.setSenha(passwordEncoder.encode("123456")); // senha de 6 dígitos
 		admin.setRole("ADMIN");
