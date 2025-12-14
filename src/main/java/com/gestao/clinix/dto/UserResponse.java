@@ -6,6 +6,7 @@ package com.gestao.clinix.dto;
 public class UserResponse {
 
 	private Long id;
+	private String nome;
 	private String usuario;
 	private String role;
 	private boolean ativo;
@@ -17,6 +18,14 @@ public class UserResponse {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getUsuario() {

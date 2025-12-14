@@ -15,6 +15,9 @@ public class Users {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "nome", nullable = false, length = 255)
+	private String nome;
+
 	// Mapeia para a coluna 'username' existente no banco
 	@Column(name = "username", nullable = false, unique = true, length = 255)
 	private String usuario;
@@ -37,6 +40,14 @@ public class Users {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getUsuario() {
