@@ -32,6 +32,7 @@ public class UserService {
 		});
 
 		Users u = new Users();
+		u.setNome(dto.getNome());
 		u.setUsuario(dto.getUsuario());
 		u.setSenha(encoder.encode(dto.getSenha())); // salva hash
 		u.setRole(dto.getRole());
