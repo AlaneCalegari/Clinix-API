@@ -1,5 +1,6 @@
 package com.gestao.clinix.utils;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,15 @@ public class DataLoader implements CommandLineRunner {
 	private final UserRepository userRepository;
 	private final PasswordEncoder passwordEncoder;
 
+	@Value("${admin.email:admin@clinix.com}")
+	private String adminEmail;
+
+	@Value("${admin.password:123456}")
+	private String adminPassword;
+
+	@Value("${admin.name:Administrador}")
+	private String adminName;
+
 	public DataLoader(UserRepository userRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
@@ -25,9 +35,9 @@ public class DataLoader implements CommandLineRunner {
 
 		// Cria apenas o admin
 		Users admin = new Users();
-		admin.setNome("Rafael Zanella");
-		admin.setUsuario("rafael.zanella@clinix.com"); // seu e-mail corporativo
-		admin.setSenha(passwordEncoder.encode("123456")); // senha de 6 dígitos
+		admin.setNome(adminName);
+		admin.setUsuario(adminEmail);
+		admin.setSenha(passwordEncoder.encode(adminPassword));
 		admin.setRole("ADMIN");
 		admin.setAtivo(true);
 
