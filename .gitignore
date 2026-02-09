@@ -16,7 +16,8 @@ release.properties
 # Spring Boot
 *.log
 *.tmp
-application.properties
+
+**application.properties
 
 # Eclipse / STS
 .classpath
@@ -46,3 +47,4 @@ Thumbs.db
 .mtj.tmp/
 hs_err_pid*
 replay_pid*
+
